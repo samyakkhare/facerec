@@ -12,9 +12,6 @@ if ($_GET['q']==1){
 </head>
 <body>	
 	<form class="login100-form validate-form" method="post" name="form" action="reg.php">
-					<span class="login100-form-title">
-						Member Login
-					</span>
 
 					
 					<div class="wrap-input100 validate-input" data-validate = "Name is required">
