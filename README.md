@@ -1,4 +1,4 @@
-# facerec
+#facerec
 
 FaceRec Register/Login 
 
@@ -26,9 +26,10 @@ Before running the website make sure:
 	2. haarcascade_eye.xml
 	3. upload_data.php
 	4. upload_reg.php
-	5. test.py
-	6. trainer.py
-	7. recog.py
+	5. train.php
+	6. test.py
+	7. trainer.py
+	8. recog.py
 
 3. Import facerec.sql in your mysql
 
@@ -44,6 +45,9 @@ Before running the website make sure:
 	2. in upload_data.php 
 		from $command="/home/samyak/.virtualenvs/cv/bin/python recog.py ".$eid;
 	    to $command="/path/to/python/executable recog.py ".$eid;
+	3. in train.php
+		from $command1="/home/samyak/.virtualenvs/cv/bin/python trainer.py ".$_SESSION['eid'];
+		to $command1="/path/to/python/executable train.py ".$_SESSION['eid'];
 
 6. Change the shebangs (1st line) 
 from #!/home/samyak/.virtualenvs/cv/bin/python 
@@ -57,7 +61,7 @@ Running the portal:
 1. Go to your browser (tested on Firefox)
 2. Enter localhost/facerec/ in the url browser or whatever path you are running the server
 
-(Allow Camera access in the browser if prompted)
+[Allow Camera access in the browser if prompted]
 
 1. To register a user
 	1. Click on Create your account
@@ -79,5 +83,5 @@ P.s The index page redirects to test.html
 - Developed and coded by
 Samyak Khare
 samyakkhare@gmail.com
- 
+https://github.com/samyakkhare/facerec/
 
