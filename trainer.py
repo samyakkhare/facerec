@@ -8,7 +8,7 @@ param1 = sys.argv[1]
 param2 = int(sys.argv[1])
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-detector= cv2.CascadeClassifier("/var/www/html/facerec/haarcascade_frontalface_default.xml");
+detector= cv2.CascadeClassifier("/var/www/html/lel/haarcascade_frontalface_default.xml");
 
 def getImagesAndLabels(path):
     #get the path of all the files in the folder
@@ -26,13 +26,13 @@ def getImagesAndLabels(path):
     for imagePath in imagePaths:
         #loading the image and converting it to gray scale
         pilImage=Image.open(imagePath).convert('L')
-        print(pilImage)
+        # print(pilImage)
         #Now we are converting the PIL image into numpy array
         imageNp=np.array(pilImage,'uint8')
-        print(imageNp)
+        # print(imageNp)
         #getting the Id from the image
         Id=int(os.path.split(imagePath)[-1].split(".")[1])
-        print(Id)
+        # print(Id)
         # extract the face from the training image sample
         faces=detector.detectMultiScale(imageNp)
         #If a face is there then append that in the list as well as Id of it
@@ -42,7 +42,7 @@ def getImagesAndLabels(path):
     return faceSamples,Ids
 
 
-faces,Ids = getImagesAndLabels('/var/www/html/facerec/output')
+faces,Ids = getImagesAndLabels('/var/www/html/lel/output')
 recognizer.train(faces, np.array(Ids))
 recognizer.write('trainer/'+param1+'.yml')
 
