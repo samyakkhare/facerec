@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->  
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->  
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+    
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+ 
+
+            <form class="login100-form validate-form" method="post" accept-charset="utf-8" id="data" name="data" enctype="multipart/form-data">
+                
+                <input name="hidden_data" id='hidden_data' type="hidden"/>
+
+                <span class="login100-form-title">
+                        Member Login
+                </span>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                        <input class="input100"  id ="email" type="text" name="email" placeholder="Email">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Employee id is required">
+                        <input class="input100"  id ="eid" type="text" name="eid" placeholder="Employee id">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="err" id="add_err">
+                        
+                    </div>
+
+                <!--    <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                        <input class="input100"  id ="pass" type="password" name="pass" placeholder="Password">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div> -->
+                    
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" id="submit" name="submit" value="submit">Login</button>
+                    </div>
+
+                    <div class="text-center p-t-12">
+                        <span class="txt1">
+                            Forgot
+                        </span>
+                        <a class="txt2" href="#">
+                            Username / Password?
+                        </a>
+                    </div>
+
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="register.php">
+                            Create your Account
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </form>
+
+                <video id="video" width="300" height="300" autoplay></video>
+                <button id="snap">Snap Photo</button>
+                <canvas width="500" height="500" id="canvas"></canvas>
+
+            </div>
+        </div>
+    </div>
+    
+    <!--===============================================================================================-->  
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/tilt/tilt.jquery.min.js"></script>
+    <script >
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+<!--===============================================================================================-->
+    <script src="js/main.js"></script>
+<!--=================================================================================================-->
+        <script type="text/javascript">
+                window.onload = function() {
+
+                    var video = document.getElementById('video');
+
+// Get access to the camera!
+                    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+                        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        //video.src = window.URL.createObjectURL(stream);
+                        video.srcObject = stream;
+                        video.play();
+                        });
+                    }
+
+/* Legacy code below: getUserMedia 
+else if(navigator.getUserMedia) { // Standard
+    navigator.getUserMedia({ video: true }, function(stream) {
+        video.src = stream;
+        video.play();
+    }, errBack);
+} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+    navigator.webkitGetUserMedia({ video: true }, function(stream){
+        video.src = window.webkitURL.createObjectURL(stream);
+        video.play();
+    }, errBack);
+} else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+    navigator.mozGetUserMedia({ video: true }, function(stream){
+        video.srcObject = stream;
+        video.play();
+    }, errBack);
+}
+*/
+                // Elements for taking the snapshot
+                    var canvas = document.getElementById('canvas');
+                    var context = canvas.getContext('2d');
+                    var video = document.getElementById('video');
+
+// Trigger photo take
+                    document.getElementById("snap").addEventListener("click", function() {
+                    context.drawImage(video, 0, 0, 500, 500);
+                    });
+
+                    video.srcObject = null;
+
+                }
+        </script>
+ 
+        <script>
+        //    function uploadEx() {
+                // var canvas = document.getElementById("canvas");
+                // var dataURL = canvas.toDataURL("image/png");
+                // document.getElementById('hidden_data').value = dataURL;
+                // var email = document.getElementById("email");
+                // var eid = document.getElementById("eid");
+
+                // var fd = new FormData(document.forms["form"]);
+ 
+                // var xhr = new XMLHttpRequest();
+                
+                // xhr.open('POST', 'upload_data.php', true);
+
+ 
+                // // xhr.upload.onprogress = function(e) {
+                // //     if (e.lengthComputable) {
+                // //         var percentComplete = (e.loaded / e.total) * 100;
+                // //         console.log(percentComplete + '% uploaded');
+                // //         if (this.responseText == '1')
+                // //             alert('Succesfully uploaded');
+                // //     }
+                // // };
+                // xhr.send(fd);
+
+                // xhr.onreadystatechange = function() {
+                //     if (this.readyState == 4 && this.status == 200) {
+                //     alert(this.responseText);
+                //     }
+                // };
+
+                //alert(this.responseText);
+        //    };
+        </script>
+
+        <script>
+                
+              //  var fd = new FormData();
+                // fd.append('eid', eid);
+                // fd.append('hidden_data', dataURL);
+               //$("#add_err").css('display', 'none', 'important');
+ //                $("#login").click(function(){ 
+ //                    var canvas = document.getElementById("canvas");
+ //                    var dataURL = canvas.toDataURL("image/png");
+ //                    document.getElementById('hidden_data').value = dataURL;
+ //                    var eid = document.getElementById("eid");
+ //                    var fd = new FormData(document.forms["form"]);
+ //                    //username=$("#email").val();
+ //                    //password=$("#eid").val();
+ //                    $.ajax({
+ //                        type: "POST",
+ //                        url: "upload_data.php",
+ //                        processData: false,
+ //                        //contentType: false,
+ //                        contentType: 'multipart/form-data',
+ //                        data: fd,
+ //                        success: function(html){    
+ //                            if(html==1){
+ // //$("#add_err").html("right username or password");
+ //                                console.log("hahahaha");
+ //                                window.location="dashboard.php";
+ //                            }
+ //                            else{
+ //                                $("#add_err").css('display', 'inline', 'important');
+ //                                $("#add_err").html("Wrong username or password");
+ //                            }
+ //                        },
+ //                        beforeSend:function(){
+ //                            $("#add_err").css('display', 'inline', 'important');
+ //                        }
+ //                    });
+ //                return false;
+ //                });
+        </script>
+
+        <script>
+            $("form#data").submit(function(e) {
+    e.preventDefault();    
+    var canvas = document.getElementById("canvas");
+    var dataURL = canvas.toDataURL("image/png");
+    document.getElementById('hidden_data').value = dataURL;
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: 'upload_data.php',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            console.log(data);
+            if (data==1){
+            window.location="dashboard.php";  
+            }
+            else{
+               $("#add_err").css('display', 'inline', 'important');
+               $("#add_err").html("Not recognised. Kindly retry with better lighting."); 
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+});
+</script>
+
+    
+
+
+</body>
+</html>
