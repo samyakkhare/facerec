@@ -25,7 +25,8 @@ $message = shell_exec($cmd);
  	//$cmd1=escapeshellcmd($command1);
  	//$message1 = shell_exec($cmd1);
  	//if ($message1 == 1)
- 		echo $_SESSION['eid']." successfully Registered. Please click the logout button below and login.";
+ 	header('Location: train.php');
+ 		//echo $_SESSION['eid']." successfully Registered. Please click the logout button below and login.";
  	//else
  		//echo "Error generating trainer file. Please contact system admin."
  }
@@ -38,7 +39,7 @@ $message = shell_exec($cmd);
 
 ?>
 
-<!DOCTYPE HTML>
+<!-- <!DOCTYPE HTML>
 <html>
 <head>
 	<title>Registration</title>
@@ -52,4 +53,4 @@ $message = shell_exec($cmd);
 
 </body>
 
-</html>
+</html> -->
